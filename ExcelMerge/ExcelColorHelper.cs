@@ -40,9 +40,9 @@ namespace ExcelMerge
             {
                 if (string.IsNullOrEmpty(fill.BackgroundColor.Rgb))
                 {
-                    if(!string.IsNullOrEmpty(fill.BackgroundColor.Theme))
+                    if(fill.BackgroundColor.Indexed == 0)
                     {
-                        int theme = int.Parse(fill.BackgroundColor.Theme);
+                        int theme = (int)(fill.BackgroundColor.Theme);
                         return GetTintColor(Themes[theme], (double)fill.BackgroundColor.Tint);
                     }
                     if(fill.BackgroundColor.Indexed > 0 && fill.BackgroundColor.Indexed <64)
