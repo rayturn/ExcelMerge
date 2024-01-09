@@ -31,7 +31,7 @@ namespace ExcelMerge
             }
             else
             {
-                MessageBox.Show("Please run with arguments:\r\nExcelMerge.exe <file1> <file2>");
+                //MessageBox.Show("Please run with arguments:\r\nExcelMerge.exe <file1> <file2>");
             }
             Application.Run(new FormMain());
         }

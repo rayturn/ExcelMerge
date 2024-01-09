@@ -25,6 +25,9 @@ namespace ExcelMerge
         public event CurrentCellChangedHandler CurrentCellChanged;
 
 
+        public delegate void SelectedFileChanged(string file);
+        public event SelectedFileChanged SelectFileChanged;
+
 
         public ExcelPackage Excel { get; set; }
 
@@ -212,5 +215,23 @@ namespace ExcelMerge
             }
         }
 
+        private void Open_Click(object sender, EventArgs e)
+        {
+            FileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "EXCEL|(*.xlsx)";
+            if(dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                this.ExcelFile.Text = dialog.FileName;
+            }
+        }
+
+        private void ExcelFile_TextChanged(object sender, EventArgs e)
+        {
+            if(System.IO.File.Exists(this.ExcelFile.Text))
+            {
+                if (SelectFileChanged != null)
+                    SelectFileChanged.Invoke(this.ExcelFile.Text);
+            }
+        }
     }
 }

@@ -54,5 +54,33 @@ namespace ExcelMerge
             Properties.Settings.Default.Save();
             MessageBox.Show("Format display will take effect after next startup.");
         }
+
+        private string selectedFile = null;
+
+        private void SelectFile(string fileName,bool isLeft)
+        {
+            if (selectedFile == null)
+            {
+                selectedFile = fileName;
+            }
+            else
+            {
+                if (isLeft)
+                    ExcelMergeManager.Instance.OpenDiff(fileName, selectedFile);
+                else
+                    ExcelMergeManager.Instance.OpenDiff(selectedFile, fileName);
+            }
+        }
+        private void excelViewLeft_SelectFileChanged(string file)
+        {
+            SelectFile(file, true);
+        }
+
+        private void excelViewRight_SelectFileChanged(string file)
+        {
+            SelectFile(file, false);
+        }
+
+
     }
 }

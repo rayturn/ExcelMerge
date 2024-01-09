@@ -94,6 +94,7 @@ namespace ExcelMerge
 
         public bool OpenDiff(string left,string right)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             if (!string.IsNullOrEmpty(left))
                 leftExcel = new ExcelPackage(new FileInfo(left));
             if (!string.IsNullOrEmpty(right))
@@ -115,13 +116,13 @@ namespace ExcelMerge
         void DiffSheet()
         {
             HashSet<string> leftSheets = new HashSet<string>();
-            for (int i = 1; i <= this.leftExcel.Workbook.Worksheets.Count; i++)
+            for (int i = 0; i < this.leftExcel.Workbook.Worksheets.Count; i++)
             {
                 leftSheets.Add(this.leftExcel.Workbook.Worksheets[i].Name);
             }
 
             HashSet<string> rightSheets = new HashSet<string>();
-            for (int i = 1; i <= this.rightExcel.Workbook.Worksheets.Count; i++)
+            for (int i = 0; i < this.rightExcel.Workbook.Worksheets.Count; i++)
             {
                 rightSheets.Add(this.rightExcel.Workbook.Worksheets[i].Name);
             }
