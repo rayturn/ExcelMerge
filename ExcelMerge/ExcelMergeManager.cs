@@ -427,9 +427,7 @@ namespace ExcelMerge
                                     }
                                     this.Result.AddDiff(DiffType.Delete, ContentType.Row, leftSheet.Name, leftSheet.Cells[leftRow, 1, foundInRight - 1, leftSheet.Dimension.Columns]);
                                     leftRow += difRows;
-                                }
-
-                                if (foundInLeft > 0)
+                                } else if (foundInLeft > 0)
                                 {//右边在左侧找到了,说明右侧删除，右侧插入占位
                                     leftRow = foundInLeft;
                                     int difRows = foundInLeft - rightRow;
